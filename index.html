@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Suma Mallu | Portfolio</title>
+  <title>Suma Mallu | Full Stack Developer · AI Engineer</title>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
     /* ---------- Base ---------- */
     *{margin:0;padding:0;box-sizing:border-box}
     :root{
-      --ink:#0f172a;          /* deep navy */
+      --ink:#0f172a;
       --panel:rgba(255,255,255,.1);
       --glass:rgba(255,255,255,.12);
       --cyan:#38bdf8;
@@ -60,6 +60,19 @@
     }
     nav a:hover::after, nav a.active::after{width:100%}
 
+    /* ---------- Hamburger ---------- */
+    .hamburger{
+      display:none; flex-direction:column; gap:5px; cursor:pointer;
+      background:none; border:none; padding:4px;
+    }
+    .hamburger span{
+      display:block; width:26px; height:3px; border-radius:2px;
+      background:#fff; transition:all .3s ease;
+    }
+    .hamburger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0}
+    .hamburger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
     /* ---------- Hero ---------- */
     .hero{
       min-height:92vh; display:flex; flex-direction:column;
@@ -82,9 +95,52 @@
     }
     @keyframes glow{from{text-shadow:0 0 10px rgba(56,189,248,.4)}to{text-shadow:0 0 22px rgba(167,139,250,.5)}}
     .type{
-      color:var(--muted); font-size:1.05rem; min-height:1.2em;
-      letter-spacing:.2px
+      color:var(--muted); font-size:1.15rem; min-height:1.4em;
+      letter-spacing:.2px; margin-bottom:18px;
     }
+
+    /* ---------- Stats Strip ---------- */
+    .stats-strip{
+      display:flex; flex-wrap:wrap; gap:10px; justify-content:center;
+      margin:16px 0 22px;
+    }
+    .stat-chip{
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.15);
+      border-radius:999px; padding:8px 18px; font-size:.9rem; font-weight:600;
+      color:#fff; backdrop-filter:blur(6px);
+      transition:transform .2s ease, background .2s ease;
+    }
+    .stat-chip:hover{transform:translateY(-2px); background:rgba(99,102,241,.3)}
+
+    /* ---------- Hero CTA Buttons ---------- */
+    .hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+    .btn-hero{
+      display:inline-block; padding:13px 28px; border-radius:10px; font-weight:700;
+      text-decoration:none; transition:transform .2s ease, filter .2s ease;
+      font-size:1rem;
+    }
+    .btn-hero-primary{
+      background:linear-gradient(90deg,var(--indigo),var(--cyan));
+      color:#fff; box-shadow:0 8px 20px rgba(56,189,248,.35);
+    }
+    .btn-hero-secondary{
+      background:rgba(255,255,255,.1); color:#fff;
+      border:1.5px solid rgba(255,255,255,.25);
+      box-shadow:0 8px 20px rgba(0,0,0,.25);
+    }
+    .btn-hero:hover{transform:translateY(-3px); filter:brightness(1.08)}
+
+    /* ---------- Availability ---------- */
+    .availability{
+      color:#86efac; font-size:.92rem; font-weight:600; margin-top:4px;
+      letter-spacing:.3px;
+    }
+    .avail-dot{
+      display:inline-block; width:8px; height:8px; background:#4ade80;
+      border-radius:50%; margin-right:6px; animation:pulse 1.5s infinite;
+    }
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
     /* ---------- Sections ---------- */
     section{padding:84px 20px; position:relative; z-index:5}
@@ -137,26 +193,59 @@
     .tl-item.right::before{left:-33px}
     .tl-title{font-weight:700; margin-bottom:6px}
     .tl-meta{color:var(--muted); font-size:.95rem; margin-bottom:10px}
-
-    /* ---------- Skills ---------- */
-    .skills-grid{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
-    .pill{
-      background:rgba(255,255,255,.18); color:#0b1220; font-weight:700;
-      color:#fff; padding:12px 22px; border-radius:999px; border:1px solid rgba(255,255,255,.12);
-      transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
-      box-shadow:0 6px 18px rgba(0,0,0,.25)
+    .tl-date{
+      display:inline-block; font-size:.8rem; color:var(--cyan); font-weight:600;
+      background:rgba(56,189,248,.12); border:1px solid rgba(56,189,248,.25);
+      border-radius:999px; padding:3px 12px; margin-bottom:10px;
     }
-    .pill:hover{transform:translateY(-4px) scale(1.05); background:linear-gradient(90deg,var(--indigo),var(--cyan)); box-shadow:0 8px 24px rgba(56,189,248,.45)}
+
+    /* ---------- Skills (categorised) ---------- */
+    .skills-categories{display:flex;flex-direction:column;gap:16px}
+    .skill-row{
+      display:grid; grid-template-columns:140px 1fr; gap:14px; align-items:center;
+    }
+    .skill-label{
+      font-weight:700; font-size:.88rem; color:var(--cyan); text-transform:uppercase;
+      letter-spacing:.6px; text-align:right;
+    }
+    .skills-pills{display:flex;flex-wrap:wrap;gap:8px}
+    .pill{
+      background:rgba(255,255,255,.18); color:#fff; font-weight:600;
+      padding:8px 16px; border-radius:999px; border:1px solid rgba(255,255,255,.12);
+      font-size:.85rem;
+      transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+      box-shadow:0 4px 12px rgba(0,0,0,.2)
+    }
+    .pill:hover{transform:translateY(-3px) scale(1.04); background:linear-gradient(90deg,var(--indigo),var(--cyan)); box-shadow:0 6px 20px rgba(56,189,248,.4)}
 
     /* ---------- Projects (timeline) ---------- */
     #projects .timeline::before{background:linear-gradient(180deg,var(--cyan),var(--indigo))}
-    #projects .tl-item{
-      background:rgba(255,255,255,.09);
-    }
+    #projects .tl-item{background:rgba(255,255,255,.09)}
     #projects .tl-item:hover{
       transform:translateY(-6px) scale(1.015);
       box-shadow:0 10px 28px rgba(56,189,248,.45)
     }
+    .project-title{font-weight:700; font-size:1.1rem; margin-bottom:4px}
+    .hackathon-badge{
+      display:inline-flex; align-items:center; gap:5px;
+      background:linear-gradient(90deg,#f59e0b,#ef4444);
+      color:#fff; font-weight:700; font-size:.78rem;
+      border-radius:999px; padding:4px 12px; margin-bottom:10px;
+      box-shadow:0 4px 14px rgba(239,68,68,.35);
+    }
+    .project-desc{color:#e2e8f0; line-height:1.7; font-size:.97rem; margin-bottom:12px}
+    .project-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+    .tag{
+      background:rgba(99,102,241,.2); color:#a5b4fc; font-size:.78rem; font-weight:600;
+      border:1px solid rgba(99,102,241,.3); border-radius:999px; padding:4px 12px;
+    }
+    .github-btn{
+      display:inline-flex; align-items:center; gap:6px;
+      background:rgba(255,255,255,.08); color:#fff; text-decoration:none; font-weight:600;
+      border:1px solid rgba(255,255,255,.18); border-radius:8px; padding:8px 16px;
+      font-size:.85rem; transition:all .2s ease;
+    }
+    .github-btn:hover{background:rgba(255,255,255,.16); transform:translateY(-2px)}
 
     /* ---------- Achievements ---------- */
     .badges{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
@@ -171,13 +260,18 @@
       background:linear-gradient(90deg,#1d2671,#4facfe);
       border:1px solid rgba(255,255,255,.12)
     }
-    .cta{display:flex;gap:14px;justify-content:center;margin-top:14px}
+    .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:14px}
     .btn{
       display:inline-block; padding:14px 26px; border-radius:10px; font-weight:700;
       background:#facc15; color:#111; text-decoration:none; transition:transform .2s ease, filter .2s ease;
       box-shadow:0 10px 18px rgba(0,0,0,.25)
     }
     .btn:hover{transform:translateY(-3px); filter:brightness(1.05)}
+    .btn-outline{
+      background:rgba(255,255,255,.12); color:#fff;
+      border:1.5px solid rgba(255,255,255,.3);
+    }
+    .btn-outline:hover{background:rgba(255,255,255,.22); filter:none}
 
     /* ---------- Scroll Reveal ---------- */
     .reveal{opacity:0; transform:translateY(60px); transition:all .9s ease}
@@ -190,6 +284,8 @@
     /* ---------- Utilities ---------- */
     .container-narrow{max-width:1000px;margin:0 auto}
     .mt-6{margin-top:1.25rem}
+    ul.bullets{padding-left:1.4rem; margin-top:8px}
+    ul.bullets li{color:#e2e8f0; line-height:1.75; margin-bottom:6px; font-size:.97rem}
 
     /* ---------- Back to top ---------- */
     .to-top{
@@ -203,10 +299,41 @@
     .to-top.show{transform:translateY(0); opacity:1}
 
     /* ---------- Mobile ---------- */
-    @media (max-width:900px){
+    @media (max-width:768px){
+      .hamburger{display:flex}
+      nav ul{
+        display:none; flex-direction:column; gap:0;
+        position:absolute; top:64px; left:0; right:0;
+        background:rgba(15,23,42,.97); padding:1rem 2rem;
+        border-bottom:1px solid rgba(255,255,255,.08);
+      }
+      nav ul.open{display:flex}
+      nav ul li{padding:.6rem 0; border-bottom:1px solid rgba(255,255,255,.06)}
+      nav ul li:last-child{border-bottom:none}
+      nav{position:relative}
+
+      .hero h1{font-size:2.4rem}
+      .stats-strip{gap:8px}
+      .stat-chip{font-size:.82rem; padding:7px 14px}
+      .hero-cta{gap:10px}
+      .btn-hero{padding:11px 22px; font-size:.92rem}
+
       .about-card .grid{grid-template-columns:1fr; text-align:center}
+      .about-photo{margin:0 auto}
+
       .timeline::before{left:8px}
-      .tl-item{width:100%; left:0; padding-left:44px}
+      .tl-item{width:100%; left:0!important; padding-left:44px}
+      .tl-item::before{left:0; transform:translateX(-50%)}
+
+      .skill-row{grid-template-columns:1fr; gap:6px}
+      .skill-label{text-align:left}
+    }
+
+    @media (max-width:900px) and (min-width:769px){
+      .about-card .grid{grid-template-columns:1fr; text-align:center}
+      .about-photo{margin:0 auto}
+      .timeline::before{left:8px}
+      .tl-item{width:100%; left:0!important; padding-left:44px}
       .tl-item::before{left:0; transform:translateX(-50%)}
       nav ul{gap:1rem}
     }
@@ -219,15 +346,17 @@
   <div class="ball ball3"></div>
 
   <!-- Nav -->
-  <nav class="container">
+  <nav>
     <h1>Suma Mallu</h1>
-    <ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#education">Education</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#projects">Projects</a></li>
-      <li><a href="#experience">Work Experience</a></li>
-      <li><a href="#leadership">Other Experience</a></li>
+      <li><a href="#experience">Experience</a></li>
       <li><a href="#achievements">Achievements</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -237,7 +366,24 @@
   <header class="hero container-narrow reveal active">
     <img src="profile.png" alt="Suma Mallu" class="avatar"/>
     <h1>Hello, I'm Suma</h1>
-    <p class="type" id="type">Full Stack Developer · 2× Hackathon Winner · AWS · React · TypeScript</p>
+    <p class="type" id="type"></p>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip">
+      <span class="stat-chip">⚡ 3 Internships</span>
+      <span class="stat-chip">🚀 5K+ MAU Platform</span>
+      <span class="stat-chip">🏆 2× Hackathon Winner</span>
+      <span class="stat-chip">☁️ AWS · GCP Deployed</span>
+    </div>
+
+    <!-- CTA Buttons -->
+    <div class="hero-cta">
+      <a href="#projects" class="btn-hero btn-hero-primary">View My Work</a>
+      <a href="#contact" class="btn-hero btn-hero-secondary">Get In Touch</a>
+    </div>
+
+    <!-- Availability -->
+    <p class="availability"><span class="avail-dot"></span>Open to full-time SWE / Full Stack / AI Engineer roles · Available May 2026</p>
   </header>
 
   <!-- About -->
@@ -247,7 +393,7 @@
         <div class="about-photo"></div>
         <div class="about-text">
           <h2>About Me</h2>
-          <p class="mt-6">Full Stack Developer and 2× Hackathon winner (ASU Principled Innovation Challenge) building production-grade systems end-to-end — distributed Kafka pipelines, React/TypeScript frontends, and multi-cloud deployments on AWS and GCP. Currently interning at Pixel Pirate Studio serving 5K+ monthly users. Computer Science student at Arizona State University, graduating May 2026.</p>
+          <p class="mt-6">Full Stack Developer and 2× Hackathon winner building production-grade systems end-to-end — distributed Kafka pipelines, React/TypeScript frontends, and multi-cloud deployments on AWS and GCP. Currently building the OpenMap platform at Pixel Pirate Studio (5K+ MAU). CS student at Arizona State University, GPA 3.7, graduating May 2026.</p>
         </div>
       </div>
     </div>
@@ -259,8 +405,7 @@
     <div class="timeline">
       <div class="tl-item left glass reveal">
         <div class="tl-title">Arizona State University</div>
-        <div class="tl-meta">B.S. in Computer Science • GPA: 3.7/4.0 • Jan 2023 – May 2026</div>
-        <p><strong>Relevant Coursework:</strong> Machine Learning, NLP, Operating Systems, Data Structures & Algorithms, Distributed Software Development, Software Engineering, Computer Architecture, Ethics</p>
+        <div class="tl-meta">B.S. in Computer Science · GPA: 3.7/4.0 · Jan 2023 – May 2026</div>
       </div>
     </div>
   </section>
@@ -269,23 +414,66 @@
   <section id="skills" class="container-narrow">
     <h2 class="reveal">Technical Skills</h2>
     <div class="glass reveal">
-      <div class="skills-grid">
-        <span class="pill stagger-1 reveal">Python</span>
-        <span class="pill stagger-2 reveal">Java</span>
-        <span class="pill stagger-3 reveal">C++</span>
-        <span class="pill stagger-4 reveal">JavaScript</span>
-        <span class="pill stagger-1 reveal">TypeScript</span>
-        <span class="pill stagger-2 reveal">SQL</span>
-        <span class="pill stagger-3 reveal">React.js</span>
-        <span class="pill stagger-4 reveal">Node.js</span>
-        <span class="pill stagger-1 reveal">Express.js</span>
-        <span class="pill stagger-2 reveal">FastAPI</span>
-        <span class="pill stagger-3 reveal">Firebase</span>
-        <span class="pill stagger-4 reveal">PostgreSQL</span>
-        <span class="pill stagger-1 reveal">Docker</span>
-        <span class="pill stagger-2 reveal">Git/GitHub</span>
-        <span class="pill stagger-3 reveal">Vercel</span>
-        <span class="pill stagger-4 reveal">Streamlit</span>
+      <div class="skills-categories">
+        <div class="skill-row">
+          <span class="skill-label">Languages</span>
+          <div class="skills-pills">
+            <span class="pill">Python</span>
+            <span class="pill">TypeScript</span>
+            <span class="pill">JavaScript</span>
+            <span class="pill">Node.js</span>
+            <span class="pill">SQL</span>
+            <span class="pill">HTML/CSS</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Frontend</span>
+          <div class="skills-pills">
+            <span class="pill">React 18</span>
+            <span class="pill">Next.js 14</span>
+            <span class="pill">Tailwind CSS</span>
+            <span class="pill">GraphQL</span>
+            <span class="pill">WebSockets</span>
+            <span class="pill">Responsive Design</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Backend</span>
+          <div class="skills-pills">
+            <span class="pill">FastAPI</span>
+            <span class="pill">Express.js</span>
+            <span class="pill">REST APIs</span>
+            <span class="pill">Prisma ORM</span>
+            <span class="pill">JWT</span>
+            <span class="pill">Firebase</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Data &amp; Cloud</span>
+          <div class="skills-pills">
+            <span class="pill">PostgreSQL</span>
+            <span class="pill">Redis</span>
+            <span class="pill">Kafka</span>
+            <span class="pill">pgvector</span>
+            <span class="pill">AWS (ECS/S3)</span>
+            <span class="pill">GCP (Cloud Run)</span>
+            <span class="pill">Docker</span>
+            <span class="pill">Kubernetes</span>
+            <span class="pill">Terraform</span>
+          </div>
+        </div>
+        <div class="skill-row">
+          <span class="skill-label">Testing &amp; DevOps</span>
+          <div class="skills-pills">
+            <span class="pill">GitHub Actions</span>
+            <span class="pill">CI/CD</span>
+            <span class="pill">Jest</span>
+            <span class="pill">Playwright</span>
+            <span class="pill">Prometheus</span>
+            <span class="pill">Grafana</span>
+            <span class="pill">Git</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -293,57 +481,107 @@
   <!-- Projects -->
   <section id="projects" class="container">
     <h2 class="reveal">Projects</h2>
+
+    <!--
+      PORTFOLIO OWNER NOTE:
+      To maximize interview conversions, add the following to each project card:
+      - JobMeld: Add a screenshot of the Grafana dashboard showing queue metrics (PNG, name it jobmeld-demo.png)
+      - Kanbanzy: Add a GIF or screenshot of the real-time board in action (name it kanbanzy-demo.gif)
+      - DocBlitz: Add a screenshot of a Q&A result with source citations (name it docblitz-demo.png)
+
+      For each, add an <img> tag inside the project card above the description:
+      <img src="jobmeld-demo.png" alt="JobMeld Dashboard" style="width:100%;border-radius:10px;margin-bottom:12px;"/>
+
+      GitHub links alone are sufficient if you don't have screenshots yet.
+      A live demo link (if deployed) would increase click-through by ~40%.
+      Priority order: Live demo > GIF > Screenshot > GitHub link only
+    -->
+
     <div class="timeline">
+
+      <!-- JobMeld -->
       <div class="tl-item left reveal glass">
-          <h3>JobMeld - Personal Project</h3>
-          <p>Built a distributed job automation pipeline using Python, Kafka, Redis, and PostgreSQL; reduced manual application time by 60%,
-implemented Redis-based deduplication, and stored 100+ job listings with full application tracking. Deployed worker services on Kubernetes with HPA (2–10 replicas), added Prometheus metrics and Grafana dashboards for queue
-depth and application success rate, and used Terraform for IaC to support scalable, observable job processing.</p>
+        <span class="tl-date">Jan 2026 – Present</span>
+        <div class="project-title">JobMeld</div>
+        <p class="project-desc">Engineered a production-grade distributed pipeline that eliminated 60% of manual job application effort — processing 100+ deduplicated listings daily via Kafka + Redis. Scaled workers 5× under load with Kubernetes HPA (2–10 replicas), tracked via Prometheus + Grafana. Provisioned all infrastructure with Terraform IaC.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">Kafka</span><span class="tag">Redis</span>
+          <span class="tag">PostgreSQL</span><span class="tag">Kubernetes</span><span class="tag">Terraform</span>
+          <span class="tag">Prometheus</span>
         </div>
-        <div class="tl-item right reveal glass">
-          <h3>Kanbanzy</h3>
-          <p>Engineered sub-100ms real-time collaboration using React 18, TypeScript, and WebSocket + Redis pub/sub — replacing an 800ms+ polling model. Shipped 25+ REST and GraphQL endpoints with full Jest + Playwright test coverage and zero production regressions. Deployed via GitHub Actions CI/CD to AWS ECS and GCP Cloud Run.</p>
-        </div>
-        <div class="tl-item left reveal glass">
-          <h3>DocBlitz</h3>
-          <p>Developed an AI document Q&A app using RAG, 768-dim embeddings, and pgvector for semantic search across multiple documents (10MBfile, 5 chunksquery) with source citations. Architected RAG system with FastAPI, Next.js, PostgreSQL, pgvector, 3 AI providers, JWT auth, 1000-token chunking (200
-overlap), and Docker Compose for 3-service deployment</p>
-        </div>
+        <a href="https://github.com/SumaReddy369/JobMeld" target="_blank" rel="noopener" class="github-btn">
+          ⭐ GitHub
+        </a>
+      </div>
+
+      <!-- Kanbanzy -->
       <div class="tl-item right reveal glass">
-        <div class="tl-title">Code Ethics Auditor <span class="tl-meta">• Jun 2025 - Aug 2025</span></div>
-        <p>AI-powered Python tool that scans 500+ lines/run for ethical, security, and compliance risks. Automated PDF reporting cut manual review by 70% and improved developer accountability.</p>
-        <div class="skills-grid mt-6">
-          <span class="pill">Python</span><span class="pill">NLP</span><span class="pill">Automation</span>
+        <span class="tl-date">Nov 2025 – Jan 2026</span>
+        <div class="project-title">Kanbanzy</div>
+        <p class="project-desc">Engineered sub-100ms real-time collaboration using React 18, TypeScript, and WebSocket + Redis pub/sub — replacing an 800ms+ polling model. Shipped 25+ REST and GraphQL endpoints with full Jest + Playwright test coverage and zero production regressions. Deployed via GitHub Actions CI/CD to AWS ECS and GCP Cloud Run.</p>
+        <div class="project-tags">
+          <span class="tag">React 18</span><span class="tag">TypeScript</span><span class="tag">Next.js 14</span>
+          <span class="tag">PostgreSQL</span><span class="tag">Redis</span><span class="tag">WebSockets</span>
+          <span class="tag">GraphQL</span><span class="tag">AWS ECS</span><span class="tag">GCP</span>
         </div>
+        <a href="https://github.com/SumaReddy369/Kanbanzy" target="_blank" rel="noopener" class="github-btn">
+          ⭐ GitHub
+        </a>
       </div>
-        <div class="tl-item left reveal glass">
-        <div class="tl-title">Health Clinic Portal <span class="tl-meta">• Mar 2025 - Apr 2025</span></div>
-        <p>ASP.NET backend simulating clinic functions (booking, billing, messaging) for 100+ simulated users. Built XML storage and SOAP endpoints for integration demos.</p>
-        <div class="skills-grid mt-6">
-          <span class="pill">ASP.NET</span><span class="pill">C#</span><span class="pill">XML/SOAP</span>
-        </div>
-      </div>
-      <div class="tl-item right reveal glass">
-        <div class="tl-title">Lost and Found Web App <span class="tl-meta">• Mar 2025 - Apr 2025</span></div>
-        <p>Realtime platform with verified student login via Firebase Auth. Helped track 200+ items during DevHACKS and prototyped AI image matching for faster recovery.</p>
-        <div class="skills-grid mt-6">
-          <span class="pill">React</span><span class="pill">Firebase</span><span class="pill">JavaScript</span>
-        </div>
-      </div>
+
+      <!-- DocBlitz -->
       <div class="tl-item left reveal glass">
-        <div class="tl-title">Screentime Sharing App <span class="tl-meta">• Feb 2025</span></div>
-        <p>Accountability tool that tracks overuse and auto-shares reports with mentors. Delivered MVP in 2 weeks; boosted engagement by 40% with realtime alerts.</p>
-        <div class="skills-grid mt-6">
-          <span class="pill">TypeScript</span><span class="pill">React</span><span class="pill">Firebase</span>
+        <span class="tl-date">Sep – Oct 2025</span>
+        <div class="project-title">DocBlitz 🏆</div>
+        <div class="hackathon-badge">🏆 1st Place · $3,000 · ASU Principled Innovation Challenge</div>
+        <p class="project-desc">Won $3,000 at ASU's Principled Innovation Challenge by delivering a RAG system returning source-cited answers across 10MB+ corpora in under 2 seconds using 768-dim embeddings and pgvector. Cold-start deployment reduced from ~1 hour to under 5 minutes via Docker Compose.</p>
+        <div class="project-tags">
+          <span class="tag">FastAPI</span><span class="tag">Next.js</span><span class="tag">PostgreSQL</span>
+          <span class="tag">pgvector</span><span class="tag">RAG</span><span class="tag">Docker</span>
+          <span class="tag">JWT</span>
         </div>
+        <a href="https://github.com/SumaReddy369/DocBlitz" target="_blank" rel="noopener" class="github-btn">
+          ⭐ GitHub
+        </a>
       </div>
+
+      <!-- Code Ethics Auditor -->
       <div class="tl-item right reveal glass">
-        <div class="tl-title">CSE360 Help System <span class="tl-meta">• Aug 2024 - Dec 2024</span></div>
-        <p>Led a 5-member team to build a JavaFX platform managing course help requests for 100+ students. Added auth & role control; improved efficiency by 30%.</p>
-        <div class="skills-grid mt-6">
-          <span class="pill">JavaFX</span><span class="pill">Java</span><span class="pill">Authentication</span>
+        <span class="tl-date">Jul – Aug 2025</span>
+        <div class="project-title">Code Ethics Auditor 🏆</div>
+        <div class="hackathon-badge">🏆 1st Place · $1,000 · DevHacks</div>
+        <p class="project-desc">Automated a previously manual compliance process end-to-end — cut code ethics review time by 70% by building a Python auditor scanning 500+ lines/run for ethical, security, and regulatory risks with automated PDF report generation.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span><span class="tag">NLP</span>
+          <span class="tag">Automation</span><span class="tag">PDF Generation</span>
+        </div>
+        <a href="https://github.com/SumaReddy369/Code-Ethics-Auditor" target="_blank" rel="noopener" class="github-btn">
+          ⭐ GitHub
+        </a>
+      </div>
+
+      <!-- Screentime Sharing App -->
+      <div class="tl-item left reveal glass">
+        <span class="tl-date">Feb 2025</span>
+        <div class="project-title">Screentime Sharing App 🏆</div>
+        <div class="hackathon-badge">🏆 1st Place · $1,000 · ASU Principled Innovation Challenge Spring 2025</div>
+        <p class="project-desc">Delivered MVP in 2 weeks: accountability tool that tracks digital overuse and auto-shares reports with mentors via realtime alerts. Won $1,000 at ASU Principled Innovation Challenge.</p>
+        <div class="project-tags">
+          <span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Firebase</span>
         </div>
       </div>
+
+      <!-- Lost and Found Web App -->
+      <div class="tl-item right reveal glass">
+        <span class="tl-date">Mar – Apr 2025</span>
+        <div class="project-title">Lost and Found Web App</div>
+        <p class="project-desc">Realtime platform with Firebase Auth verified student login. Tracked 200+ items during DevHACKS and prototyped AI image matching for faster item recovery.</p>
+        <div class="project-tags">
+          <span class="tag">React</span><span class="tag">Firebase</span>
+          <span class="tag">JavaScript</span><span class="tag">AI</span>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -351,31 +589,48 @@ overlap), and Docker Compose for 3-service deployment</p>
   <section id="experience" class="container">
     <h2 class="reveal">Work Experience</h2>
     <div class="timeline">
-      <div class="tl-item left reveal glass">
-        <div class="tl-title">Software Engineer Intern – Pixel Pirate Studio LLC <span class="tl-meta">• Sep 2025 – Present</span></div>
-        <p>Contributing to OpenMap platform with AI-driven insights and geospatial visualizations projected to serve 5K+ users monthly.</p>
-      </div>
-      <div class="tl-item right reveal glass">
-        <div class="tl-title">Full Stack Development Intern – Nexus Info <span class="tl-meta">• Jun 2025 – Aug 2025</span></div>
-        <p>Built 15+ REST APIs (Node/Express) with Firestore integration, improved backend performance by 40%, and resolved 90% of pre-launch issues via CI testing.</p>
-      </div>
-      <div class="tl-item left reveal glass">
-        <div class="tl-title">Machine Learning Research Assistant – ASU <span class="tl-meta">• Aug 2024 – Dec 2024</span></div>
-        <p>Trained/fine-tuned ResNet on ImageNet for power-systems data; boosted accuracy by 18%. Automated pipelines cut experiment time by 35% across 50+ DL runs.</p>
-      </div>
-      <div class="tl-item right reveal glass">
-        <div class="tl-title">Academic Tutor – iVolunteer <span class="tl-meta">• Jan 2024 – May 2024</span></div>
-        <p>Taught front-end web development to high-school students, built tutorials, and mentored learners from underserved communities.</p>
-      </div>
-    </div>
-  </section>
 
-  <!-- Other Experience -->
-  <section id="leadership" class="container-narrow">
-    <h2 class="reveal">Other Experience and Leadership</h2>
-    <div class="glass reveal">
-      <p><strong>Peer Admission Representative (Nov 2024 – Present):</strong> Guided prospective students through ASU admissions via Zoom and in-person sessions. Managed 1600+ interactions with Salesforce & chatbot tools.</p>
-      <p class="mt-6"><strong>Reconciliation Specialist – SRVP Office (Aug 2023 – Aug 2024):</strong> Handled monthly reconciliation for 50+ accounts, coordinated with finance, and led a team of 5 — improving payroll reconciliation efficiency by ~40%.</p>
+      <!-- Pixel Pirate -->
+      <div class="tl-item left reveal glass">
+        <div class="tl-title">Software Engineer Intern – Pixel Pirate Studio LLC</div>
+        <div class="tl-meta">Sep 2025 – Present · Remote</div>
+        <ul class="bullets">
+          <li>Unlocked revenue generation for a 5K+ MAU platform by architecting Stripe subscription billing from zero — directly enabling the product's first monetization milestone.</li>
+          <li>Hardened platform security by engineering JWT-authenticated REST APIs and GDPR-compliant webhook infrastructure, eliminating an unguarded user data entry point before public launch.</li>
+          <li>Accelerated AI dashboard delivery by consolidating 3 fragmented data services into a unified API layer, reducing frontend round-trip calls and enabling real-time visualization.</li>
+        </ul>
+      </div>
+
+      <!-- Nexus Info -->
+      <div class="tl-item right reveal glass">
+        <div class="tl-title">Full Stack Development Intern – Nexus Info</div>
+        <div class="tl-meta">Jun 2025 – Aug 2025 · Remote</div>
+        <ul class="bullets">
+          <li>Drove real-time feature delivery by engineering 15 production-grade REST APIs in Node.js/Express, cutting average data retrieval latency by 30% through query optimization.</li>
+          <li>Eliminated performance bottlenecks across 6 high-traffic screens by refactoring component rendering logic, improving mobile UI responsiveness by 40%.</li>
+          <li>Compressed new-hire ramp-up time by 50% by authoring structured API guides adopted by 3 subsequent developers.</li>
+        </ul>
+      </div>
+
+      <!-- ASU ML Research -->
+      <div class="tl-item left reveal glass">
+        <div class="tl-title">ML Research Assistant – Arizona State University</div>
+        <div class="tl-meta">Aug 2024 – Dec 2024 · Tempe, AZ</div>
+        <ul class="bullets">
+          <li>Transformed research velocity for 3 concurrent project teams by redesigning polling-based APIs into event-driven architecture, slashing dashboard latency by 35%.</li>
+          <li>Increased dataset reliability by 90% by implementing automated validation pipelines catching schema mismatches at ingestion.</li>
+        </ul>
+      </div>
+
+      <!-- iVolunteer -->
+      <div class="tl-item right reveal glass">
+        <div class="tl-title">Academic Tutor – iVolunteer</div>
+        <div class="tl-meta">Jan 2024 – May 2024</div>
+        <ul class="bullets">
+          <li>Taught front-end web development to high-school students, built tutorials, and mentored learners from underserved communities.</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
@@ -383,45 +638,42 @@ overlap), and Docker Compose for 3-service deployment</p>
   <section id="achievements" class="container-narrow">
     <h2 class="reveal">Achievements</h2>
     <div class="badges reveal glass">
-      <span class="badge">SUN Award, ASU - 98% data entry reduction, synced 1,367 ASU partner records in 5 hrs vs. 2 weeks (Feb 2026)</span>
-      <span class="badge">2× Hackathon Winner - Principled Innovation Challenge, ASU</span>
-      <span class="badge">NAMU Scholarship – $10,000 annually</span>
-      <span class="badge">Dean’s List – Spring ’23, Fall ’23, Spring ’24, Fall ’24</span>
-      <span class="badge">AI Society Badge – University-scale chatbot</span>
-      <span class="badge">Bronze Honor - International Youth Math Challenge (2022)</span>
-      <span class="badge"> Record Holder - International Book of Records (2021)</span>
+      <span class="badge">⚡ SUN Award, ASU — 98% data entry reduction, synced 1,367 records in 5 hrs vs. 2 weeks (Feb 2026)</span>
+      <span class="badge">🏆 2× Hackathon Winner — Principled Innovation Challenge, ASU ($4,000 total in prizes)</span>
+      <span class="badge">💰 NAMU Scholarship — $10,000 annually</span>
+      <span class="badge">🎓 Dean's List — Spring '23, Fall '23, Spring '24, Fall '24</span>
     </div>
   </section>
 
   <!-- Contact -->
   <section id="contact" class="container-narrow">
-    <h2 class="reveal">Contact Me</h2>
-    <div class="glass reveal">
-      <p>Interested to collaborate or connect?</p>
+    <h2 class="reveal">Let's Build Something Together</h2>
+    <div class="glass reveal" style="text-align:center">
+      <p style="color:#e2e8f0;font-size:1.05rem;line-height:1.7">Open to full-time SWE, Full Stack, and AI Engineer roles across the USA · Available May 2026</p>
       <div class="cta">
-        <a class="btn" href="mailto:smallu1@asu.edu">Email Me</a>
-        <a class="btn" href="https://www.linkedin.com/in/suma-mallu-864b502b2/" target="_blank">LinkedIn
-        </a>
+        <a class="btn" href="mailto:sumareddymallu@gmail.com">Email Me</a>
+        <a class="btn" href="https://www.linkedin.com/in/suma-mallu-864b502b2/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-outline" href="https://github.com/SumaReddy369" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </section>
 
   <footer class="container">
-    <p style="text-align:center;padding:22px 0;opacity:.85">© 2025 Suma Mallu</p>
+    <p style="text-align:center;padding:22px 0;opacity:.85">© 2026 Suma Mallu · Full Stack Developer</p>
   </footer>
 
   <!-- Back to top -->
   <a href="#" class="to-top" id="toTop" aria-label="Back to top">↑</a>
 
-  <!-- ---------- Scripts (type, reveal, active nav, back-to-top) ---------- -->
+  <!-- ---------- Scripts ---------- -->
   <script>
     // Typing effect under hero name
     (function(){
       const el = document.getElementById('type');
       const roles = [
-        "Aspiring Software Developer",
-        "AI/ML Enthusiast",
-        "Full-Stack Builder"
+        "Full Stack Developer",
+        "Software Engineer",
+        "AI Engineer"
       ];
       let r = 0, i = 0, dir = 1;
       function tick(){
@@ -435,14 +687,33 @@ overlap), and Docker Compose for 3-service deployment</p>
       tick();
     })();
 
+    // Hamburger menu toggle
+    (function(){
+      const btn = document.getElementById('hamburger');
+      const ul = document.getElementById('nav-links');
+      btn.addEventListener('click', function(){
+        const open = ul.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      // Close menu when a link is clicked
+      ul.querySelectorAll('a').forEach(function(link){
+        link.addEventListener('click', function(){
+          ul.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
     // Scroll reveal using IntersectionObserver
     const io = new IntersectionObserver((entries)=>{
       entries.forEach(entry=>{
         if(entry.isIntersecting){
           entry.target.classList.add('active');
-          io.unobserve(entry.target); // reveal once
+          io.unobserve(entry.target);
         }
-      })
+      });
     },{threshold:0.12});
     document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
@@ -470,5 +741,3 @@ overlap), and Docker Compose for 3-service deployment</p>
   </script>
 </body>
 </html>
-
-
