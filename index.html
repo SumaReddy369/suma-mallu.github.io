@@ -298,49 +298,51 @@
     <h2 class="reveal">Projects</h2>
     <div class="timeline">
       <div class="tl-item left reveal glass">
-          <h3>JobMeld - Personal Project</h3>
-          <p>Built a distributed job automation pipeline using Python, Kafka, Redis, and PostgreSQL; reduced manual application time by 60%,
-implemented Redis-based deduplication, and stored 100+ job listings with full application tracking. Deployed worker services on Kubernetes with HPA (2–10 replicas), added Prometheus metrics and Grafana dashboards for queue
-depth and application success rate, and used Terraform for IaC to support scalable, observable job processing.</p>
+          <h3>JobMeld - Distributed Job Automation Pipeline</h3>
+          <p>Built a distributed ingestion and processing pipeline using Python, Kafka, Redis, and PostgreSQL with autoscaling Kubernetes workers. Reduced manual effort by 60% and tracked 100+ job listings end-to-end. Implemented exactly-once processing, retry/backoff strategies, and observability with Prometheus and Grafana. Used Terraform for infrastructure-as-code.</p>
         </div>
         <div class="tl-item right reveal glass">
-          <h3>Kanbanzy</h3>
-          <p>Engineered sub-100ms real-time collaboration using React 18, TypeScript, and WebSocket + Redis pub/sub — replacing an 800ms+ polling model. Shipped 25+ REST and GraphQL endpoints with full Jest + Playwright test coverage and zero production regressions. Deployed via GitHub Actions CI/CD to AWS ECS and GCP Cloud Run.</p>
+          <h3>Real-Time Auction Bidding System</h3>
+          <p>Built a low-latency system using Go, WebSockets, and Redis handling 10K+ bids/min with <200ms latency. Ensured correctness with event ordering, deduplication, and deployed using Kubernetes with autoscaling and monitoring.</p>
         </div>
         <div class="tl-item left reveal glass">
+          <h3>Kanbanzy - Real-time Task Board</h3>
+          <p>Built collaborative task board with Next.js, TypeScript, PostgreSQL, Redis. Implemented WebSockets, CI/CD (GitHub Actions), deployed on AWS ECS & GCP Cloud Run with full testing.</p>
+        </div>
+        <div class="tl-item right reveal glass">
           <h3>DocBlitz</h3>
           <p>Developed an AI document Q&A app using RAG, 768-dim embeddings, and pgvector for semantic search across multiple documents (10MBfile, 5 chunksquery) with source citations. Architected RAG system with FastAPI, Next.js, PostgreSQL, pgvector, 3 AI providers, JWT auth, 1000-token chunking (200
 overlap), and Docker Compose for 3-service deployment</p>
         </div>
-      <div class="tl-item right reveal glass">
+      <div class="tl-item left reveal glass">
         <div class="tl-title">Code Ethics Auditor <span class="tl-meta">• Jun 2025 - Aug 2025</span></div>
         <p>AI-powered Python tool that scans 500+ lines/run for ethical, security, and compliance risks. Automated PDF reporting cut manual review by 70% and improved developer accountability.</p>
         <div class="skills-grid mt-6">
           <span class="pill">Python</span><span class="pill">NLP</span><span class="pill">Automation</span>
         </div>
       </div>
-        <div class="tl-item left reveal glass">
+        <div class="tl-item right reveal glass">
         <div class="tl-title">Health Clinic Portal <span class="tl-meta">• Mar 2025 - Apr 2025</span></div>
         <p>ASP.NET backend simulating clinic functions (booking, billing, messaging) for 100+ simulated users. Built XML storage and SOAP endpoints for integration demos.</p>
         <div class="skills-grid mt-6">
           <span class="pill">ASP.NET</span><span class="pill">C#</span><span class="pill">XML/SOAP</span>
         </div>
       </div>
-      <div class="tl-item right reveal glass">
+      <div class="tl-item left reveal glass">
         <div class="tl-title">Lost and Found Web App <span class="tl-meta">• Mar 2025 - Apr 2025</span></div>
         <p>Realtime platform with verified student login via Firebase Auth. Helped track 200+ items during DevHACKS and prototyped AI image matching for faster recovery.</p>
         <div class="skills-grid mt-6">
           <span class="pill">React</span><span class="pill">Firebase</span><span class="pill">JavaScript</span>
         </div>
       </div>
-      <div class="tl-item left reveal glass">
+      <div class="tl-item right reveal glass">
         <div class="tl-title">Screentime Sharing App <span class="tl-meta">• Feb 2025</span></div>
         <p>Accountability tool that tracks overuse and auto-shares reports with mentors. Delivered MVP in 2 weeks; boosted engagement by 40% with realtime alerts.</p>
         <div class="skills-grid mt-6">
           <span class="pill">TypeScript</span><span class="pill">React</span><span class="pill">Firebase</span>
         </div>
       </div>
-      <div class="tl-item right reveal glass">
+      <div class="tl-item left reveal glass">
         <div class="tl-title">CSE360 Help System <span class="tl-meta">• Aug 2024 - Dec 2024</span></div>
         <p>Led a 5-member team to build a JavaFX platform managing course help requests for 100+ students. Added auth & role control; improved efficiency by 30%.</p>
         <div class="skills-grid mt-6">
@@ -356,15 +358,15 @@ overlap), and Docker Compose for 3-service deployment</p>
     <div class="timeline">
       <div class="tl-item left reveal glass">
         <div class="tl-title">Software Engineer Intern – Pixel Pirate Studio LLC <span class="tl-meta">• Sep 2025 – Present</span></div>
-        <p>Contributing to OpenMap platform with AI-driven insights and geospatial visualizations projected to serve 5K+ users monthly.</p>
+        <p>Owned CI/CD pipelines, Helm charts, and Kubernetes deployments supporting 5K+ users with 99.95% uptime. Built microservices and integrations (Stripe, Mailchimp), reducing incidents by 80%.</p>
       </div>
       <div class="tl-item right reveal glass">
         <div class="tl-title">Full Stack Development Intern – Nexus Info <span class="tl-meta">• Jun 2025 – Aug 2025</span></div>
-        <p>Built 15+ REST APIs (Node/Express) with Firestore integration, improved backend performance by 40%, and resolved 90% of pre-launch issues via CI testing.</p>
+        <p>Built 15+ Dockerized REST APIs with <200ms latency and improved frontend performance by 40%. Automated deployments and logging for faster debugging.</p>
       </div>
       <div class="tl-item left reveal glass">
         <div class="tl-title">Machine Learning Research Assistant – ASU <span class="tl-meta">• Aug 2024 – Dec 2024</span></div>
-        <p>Trained/fine-tuned ResNet on ImageNet for power-systems data; boosted accuracy by 18%. Automated pipelines cut experiment time by 35% across 50+ DL runs.</p>
+        <p>Built scalable APIs and ML pipelines using Kubernetes and Docker, reducing latency by 35%.</p>
       </div>
       <div class="tl-item right reveal glass">
         <div class="tl-title">Academic Tutor – iVolunteer <span class="tl-meta">• Jan 2024 – May 2024</span></div>
